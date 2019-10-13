@@ -1,10 +1,7 @@
-import controller from '../controllers/messages'
+import MessageRoutes from './messages'
+// import UserRoutes from './users'
 
-const { find, create } = controller
-
-const route = (app) => {
-	app.get('/messages', find)
-	app.post('/messages', create)
+export {
+	MessageRoutes,
+	// UserRoutes
 }
-
-export default route

@@ -13,14 +13,10 @@ const controller = {
 	},
 	find: async (req, res) => {
 		const query = req.body
-		console.log(Messages)
 		try {
-			console.log(Messages.all)
-			console.log(Object.keys(Messages))
 			const messages = await Messages.findAll()
 			res.status(200).send(messages)
 		} catch (err) {
-			console.log(err)
 			res.status(400).send(err)
 		}
 	}
