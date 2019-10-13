@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 import models from '../models'
 
@@ -23,9 +24,9 @@ const controller = {
 			})
 			res.status(200).send(newUser)
 		} catch (err) {
-			let toSend
-			if (err instanceof Error) toSend = err.message
-			res.status(400).send(toSend)
+			let error
+			if (err instanceof Error) error = err.message
+			res.status(400).send(error)
 		}
 	},
 	find: async (req, res) => {
@@ -36,9 +37,29 @@ const controller = {
 			})
 			res.status(200).send(users)
 		} catch (err) {
-			let toSend
-			if (err instanceof Error) toSend = err.message
-			res.status(400).send(toSend)
+			let error
+			if (err instanceof Error) error = err.message
+			res.status(400).send(error)
+		}
+	},
+	login: async (req, res) => {
+		const { email, password } = req.body
+		try {
+			const user = await Users.findOne({ where: { email } })
+			if (!user) throw new Error('Invalid Username/Password!')
+
+			const isSamePass = await bcrypt.compare(password, user.password)
+			if (!isSamePass) throw new Error('Invalid Username/Password!')
+		
+			const token = await jwt.sign({ email, username: user.username }, process.env.SECRET_KEY)
+			res.status(200).json({
+				message: `You are now logged in as ${user.username}`,
+				token
+			})
+		} catch (err) {
+			let error
+			if (err instanceof Error) error = err.message
+			res.status(400).send(error)
 		}
 	}
 }
