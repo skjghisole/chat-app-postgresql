@@ -2,6 +2,7 @@ import '@babel/polyfill'
 import express from 'express'
 import bodyParser from 'body-parser'
 import { Client } from 'pg'
+import routes from './routes'
 
 const app = express()
 
@@ -10,9 +11,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 const port = process.env.PORT || 2020
 
+routes(app)
+
+
 app.get('/', async (req, res, next) => {
 	// const result = await client.query('select * from "USERS"')
 	// res.send(result.rows)
+	
 })
 
 app.post('/users', async (req, res) => {
