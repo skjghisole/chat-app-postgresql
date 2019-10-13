@@ -1,0 +1,46 @@
+import bcrypt from 'bcrypt'
+
+import models from '../models'
+
+const { Users } = models
+
+const controller = {
+	create: async (req, res) => {
+		const { username, password, password2, email } = req.body
+		try {
+			const user = await Users.findOne({
+				where: { email }
+			})
+			if (user) throw new Error('Email already Used!')
+			if (password !== password2) throw new Error('Password doesn\'t match!')
+
+			const salt = await bcrypt.genSalt(10)
+			const newPassword = await bcrypt.hash(password, salt)
+			const newUser = await Users.create({
+				username,
+				password: newPassword,
+				email
+			})
+			res.status(200).send(newUser)
+		} catch (err) {
+			let toSend
+			if (err instanceof Error) toSend = err.message
+			res.status(400).send(toSend)
+		}
+	},
+	find: async (req, res) => {
+		const query = req.body
+		try {
+			const users = await Users.findAll({
+				where: {...query}
+			})
+			res.status(200).send(users)
+		} catch (err) {
+			let toSend
+			if (err instanceof Error) toSend = err.message
+			res.status(400).send(toSend)
+		}
+	}
+}
+
+export default controller

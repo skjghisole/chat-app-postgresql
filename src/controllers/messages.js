@@ -1,5 +1,5 @@
-import db from '../models';
-const { Messages } = db
+import models from '../models';
+const { Messages } = models
 
 const controller = {
 	create: async (req, res) => {
@@ -14,7 +14,9 @@ const controller = {
 	find: async (req, res) => {
 		const query = req.body
 		try {
-			const messages = await Messages.findAll()
+			const messages = await Messages.findAll({
+				where: {...query}
+			})
 			res.status(200).send(messages)
 		} catch (err) {
 			res.status(400).send(err)

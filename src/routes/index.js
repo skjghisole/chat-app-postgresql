@@ -1,7 +1,7 @@
 import MessageRoutes from './messages'
-// import UserRoutes from './users'
+import UserRoutes from './users'
 
 export {
 	MessageRoutes,
-	// UserRoutes
+	UserRoutes
 }
