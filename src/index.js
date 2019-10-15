@@ -1,7 +1,8 @@
 import '@babel/polyfill'
 import express from 'express'
 import bodyParser from 'body-parser'
-import { Server } from 'http'
+// import { createServer } from 'http'
+import cors from 'cors'
 
 import io from 'socket.io'
 
@@ -11,14 +12,14 @@ import { MessageRoutes, UserRoutes } from './routes'
 // creation of ws server
 
 const app = express()
-const wss = io(Server(app))
+app.use(cors())
 
-wss.on('connection', function(socket) {
-	console.log(socket)
-	// socket.emit('Say this', { msg: 'something else' })
-})
+// const wss = io(createServer(app))
+// console.log(wss)
 
-wss.emit('connection', { msg: 'Hello' })
+
+
+// wss.emit('connection', { msg: 'Hello' })
 // wss.on('Say this', socket => {
 // 	console.log(`Someone said: ${socket.msg}`)
 // })
@@ -30,4 +31,14 @@ app.use('/messages', MessageRoutes)
 app.use('/users', UserRoutes)
 
 const port = process.env.PORT || 2020
-app.listen(port, console.log(`Server started @ http://localhost:${port}`))
+const server = app.listen(port, console.log(`Server started at http://localhost:${port}`))
+
+const wss = io(server)
+
+wss.on('connection', function(socket) {
+	socket.emit('sayHiFromServer', { msg: 'hi' })
+	socket.on('userConnected', function() {
+		socket.broadcast.emit('newUser', { msg: 'a new User is connected!'})
+	})
+})
+// console.log(wss)
