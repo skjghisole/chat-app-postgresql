@@ -43,6 +43,7 @@ const controller = {
 		}
 	},
 	login: async (req, res) => {
+		console.log(req.body)
 		const { email, password } = req.body
 		try {
 			const user = await Users.findOne({ where: { email } })
@@ -59,7 +60,9 @@ const controller = {
 		} catch (err) {
 			let error
 			if (err instanceof Error) error = err.message
-			res.status(400).send(error)
+			res.status(400).send({
+				errMsg: error
+			})
 		}
 	}
 }

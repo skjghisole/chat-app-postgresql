@@ -36,7 +36,7 @@ const server = app.listen(port, console.log(`Server started at http://localhost:
 const wss = io(server)
 
 wss.on('connection', function(socket) {
-	socket.emit('sayHiFromServer', { msg: 'hi' })
+	socket.emit('connectedUser', { user: socket.id })
 	socket.on('userConnected', function() {
 		socket.broadcast.emit('newUser', { msg: 'a new User is connected!'})
 	})
