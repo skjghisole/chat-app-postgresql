@@ -16,11 +16,11 @@
     "port": 5432
   },
   "production": {
-    "username": process.env.DATABASE_USERNAME,
-    "password": process.env.DATABASE_PASSWORD,
-    "port": process.env.PORT,
-    "database": process.env.DATABASE_DATABASE_NAME,
-    "host": process.env.DATABASE_HOST,
-    "dialect": process.env.DATABASE_DIALECT
+    "username": "diliccwztjpdeh",
+    "password": "682fec316fc39fbaa84bb607474780c9779c8ed16945f4e0f84047c89582de9d",
+    "port": 5432,
+    "database": "d5g13j0pgcps55",
+    "host": "ec2-54-83-9-169.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }
