@@ -1,3 +1,4 @@
+import uuid from 'uuid/v1'
 import models from '../models';
 import server from '../'
 const { Messages, Users } = models
@@ -6,7 +7,7 @@ const controller = {
 	create: async (req, res) => {
 		const { content, senderId } = req.body
 		try {
-			const newMessage = await Messages.create({ content, senderId: ~~senderId })
+			const newMessage = await Messages.create({ content, senderId: ~~senderId, id: uuid() })
 			req.socket.emit('newMsg', newMessage)
 			res.status(201).send(newMessage)
 		} catch (err) {

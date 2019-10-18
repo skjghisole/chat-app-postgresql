@@ -4,16 +4,15 @@ module.exports = {
     return queryInterface.createTable('Messages', {
     	id: {
     		allowNull: false,
-            autoIncrement: true,
-            primaryKey: true,
-            type: Sequelize.INTEGER,
+        primaryKey: true,
+        type: Sequelize.STRING,
     	},
     	content: {
     		type: Sequelize.STRING,
     		allowNull: false
     	},
       senderId: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.STRING,
           onDelete: 'CASCADE',
           references: {
             model: 'Users',

@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt'
+import uuid from 'uuid/v1'
 import jwt from 'jsonwebtoken'
 
 import models from '../models'
@@ -20,7 +21,8 @@ const controller = {
 			const newUser = await Users.create({
 				username,
 				password: newPassword,
-				email
+				email,
+				id: uuid()
 			})
 			res.status(200).send(newUser)
 		} catch (err) {
