@@ -16,10 +16,11 @@
     "port": 5432
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "diliccwztjpdeh",
+    "password": "682fec316fc39fbaa84bb607474780c9779c8ed16945f4e0f84047c89582de9d",
+    "port": 5432,
+    "database": "d5g13j0pgcps55",
+    "host": "ec2-54-83-9-169.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }
