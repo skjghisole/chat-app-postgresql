@@ -1,28 +1,15 @@
 import '@babel/polyfill'
 import express from 'express'
 import bodyParser from 'body-parser'
-// import { createServer } from 'http'
 import cors from 'cors'
 
 import io from 'socket.io'
 
-import { Client } from 'pg'
 import { MessageRoutes, UserRoutes } from './routes'
 
 
 const app = express()
 app.use(cors())
-
-// const wss = io(createServer(app))
-// console.log(wss)
-
-
-
-// wss.emit('connection', { msg: 'Hello' })
-// wss.on('Say this', socket => {
-// 	console.log(`Someone said: ${socket.msg}`)
-// })
-
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
