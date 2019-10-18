@@ -7,7 +7,7 @@ const controller = {
 	create: async (req, res) => {
 		const { content, senderId } = req.body
 		try {
-			const newMessage = await Messages.create({ content, senderId: ~~senderId, id: uuid() })
+			const newMessage = await Messages.create({ content, senderId: senderId, id: uuid() })
 			req.socket.emit('newMsg', newMessage)
 			res.status(201).send(newMessage)
 		} catch (err) {
