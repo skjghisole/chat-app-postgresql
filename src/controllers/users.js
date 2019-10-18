@@ -52,9 +52,9 @@ const controller = {
 			const isSamePass = await bcrypt.compare(password, user.password)
 			if (!isSamePass) throw new Error('Invalid Username/Password!')
 		
-			const token = await jwt.sign({ email, username: user.username }, process.env.SECRET_KEY)
+			const token = await jwt.sign({ email, username: user.username, id: user.id }, process.env.SECRET_KEY)
 			res.status(200).json({
-				message: `You are now logged in as ${user.username}`,
+				message: `You are now logged in as ${user.username}, ${user.id}`,
 				token
 			})
 		} catch (err) {
