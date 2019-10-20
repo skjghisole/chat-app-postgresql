@@ -21,6 +21,16 @@ module.exports = {
           },
           allowNull: false
       },
+      channelId: {
+        type: Sequelize.STRING,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Channels',
+          key: 'id',
+          as: 'channelId',
+        },
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

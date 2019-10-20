@@ -45,7 +45,6 @@ const controller = {
 		}
 	},
 	login: async (req, res) => {
-		console.log(req.body)
 		const { email, password } = req.body
 		try {
 			const user = await Users.findOne({ where: { email } })
