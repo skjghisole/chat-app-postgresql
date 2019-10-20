@@ -5,20 +5,26 @@ const { Messages, Users } = models
 
 const controller = {
 	create: async (req, res) => {
-		const { content, senderId } = req.body
+		const { content, senderId, channelId } = req.body
+		let msg
 		try {
-			const newMessage = await Messages.create({ content, senderId: senderId, id: uuid() })
+			if (channelId === 'world') (msg = { content, senderId, id: uuid(), channelId: process.env.WORLD_CHAT_ID })
+			else (msg = { content, senderId, id: uuid(), channelId })
+			const newMessage = await Messages.create(msg)
 			req.socket.emit('newMsg', newMessage)
-			res.status(201).send(newMessage)
+			res.status(200).send(newMessage)
 		} catch (err) {
 			res.status(400).send(err)
 		}
 	},
 	find: async (req, res) => {
-		const query = req.body
+		let { channelId, ...rest } = req.query
+		if (channelId === 'world') (channelId = process.env.WORLD_CHAT_ID)
 		try {
 			const messages = await Messages.findAll({
-				where: {...query},
+				where: {
+					channelId, ...rest
+				},
 				include: [{
 					model: Users
 				}]

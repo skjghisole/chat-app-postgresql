@@ -13,6 +13,11 @@ const model = (sequelize, DataTypes) => {
       soureKey: 'id',
       onDelete: 'CASCADE'
     })
+    Messages.belongsTo(models.Channels, {
+      foreignKey: 'channelId',
+      soureKey: 'id',
+      onDelete: 'CASCADE'
+    })
   };
   return Messages;
 };
