@@ -5,7 +5,7 @@ import cors from 'cors'
 
 import io from 'socket.io'
 
-import { MessageRoutes, UserRoutes } from './routes'
+import { MessageRoutes, UserRoutes, ChannelRoutes } from './routes'
 
 
 const app = express()
@@ -35,4 +35,5 @@ const applySocketMiddleware = (req, res, next) => {
 
 app.use('/messages', applySocketMiddleware, MessageRoutes)
 app.use('/users', applySocketMiddleware, UserRoutes)
+app.use('/channels', applySocketMiddleware, ChannelRoutes)
 
