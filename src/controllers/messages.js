@@ -11,7 +11,7 @@ const controller = {
 			if (channelId === 'world') (msg = { content, senderId, id: uuid(), channelId: process.env.WORLD_CHAT_ID })
 			else (msg = { content, senderId, id: uuid(), channelId })
 			const newMessage = await Messages.create(msg)
-			req.socket.emit('newMsg', newMessage)
+			req.socket.emit(`newMsg-${channelId}`, newMessage)
 			res.status(200).send(newMessage)
 		} catch (err) {
 			res.status(400).send(err)
