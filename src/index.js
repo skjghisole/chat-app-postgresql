@@ -26,6 +26,9 @@ wss.on('connection', function(socket) {
 	socket.on('userConnected', function() {
 		socket.broadcast.emit('newUser', { msg: 'a new User is connected!'})
 	})
+	socket.on('typing', ({ channelId, username }) => {
+		socket.broadcast.emit(`typing-${channelId}`, { username })
+	})
 })
 
 const applySocketMiddleware = (req, res, next) => {
