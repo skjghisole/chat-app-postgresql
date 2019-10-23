@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rm -rf ./dist && babel src -d dist",
     "start": "node -r dotenv/config dist/",
+    "start:dev": "nodemon -r dotenv/config -r @babel/register src/",
     "migrate": "cd src/ && sequelize db:migrate --env development",
     "rollback": "cd src/ && sequelize db:migrate:undo:all --env development"
   },
