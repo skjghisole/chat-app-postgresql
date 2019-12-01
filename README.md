@@ -6,3 +6,5 @@ This repository is the server for my implementation of a Chat App called ChitCha
 1. PostgreSQL (Database)
 2. ExpressJS (Backend Framework)
 3. NodeJS (Backend)
+4. Socket.io (Websockets for realtime changes)
+5. Sequelize (PG Type ORM)
